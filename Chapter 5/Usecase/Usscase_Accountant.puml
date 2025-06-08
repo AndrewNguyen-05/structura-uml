@@ -1,0 +1,49 @@
+@startuml Usecase_Accountant
+!theme plain
+
+left to right direction
+actor "Kế toán" as Accountant
+
+rectangle "Structura Steel System" {
+    usecase "Đăng nhập" as UC_Login
+
+    ' --- Thanh toán ---
+    usecase "Thực hiện Thanh toán" as UC_MakePayment
+    usecase "Xem Lịch sử Thanh toán" as UC_ViewPayments
+    usecase "Tìm kiếm Thanh toán" as UC_SearchPayments
+
+    ' --- Công nợ ---
+    usecase "Xem chi tiết Công nợ" as UC_ViewDebt
+    usecase "Cập nhật trạng thái Công nợ" as UC_UpdateDebtStatus
+    usecase "Tìm kiếm Công nợ" as UC_SearchDebt
+
+    ' --- Đơn hàng ---
+    usecase "Xem Đơn hàng Bán" as UC_ViewSale
+    usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
+    usecase "Xem Đơn hàng Giao hàng" as UC_ViewDelivery
+
+    ' --- Đối tác ---
+    usecase "Xem thông tin Đối tác" as UC_ViewPartner
+}
+
+' --- Quan hệ ---
+Accountant -- UC_Login
+Accountant -- UC_MakePayment
+Accountant -- UC_ViewPayments
+Accountant -- UC_SearchPayments
+
+Accountant -- UC_ViewDebt
+Accountant -- UC_UpdateDebtStatus
+Accountant -- UC_SearchDebt
+
+Accountant -- UC_ViewSale
+Accountant -- UC_ViewPurchase
+Accountant -- UC_ViewDelivery
+
+Accountant -- UC_ViewPartner
+
+' --- Include ---
+UC_MakePayment ..> UC_ViewDebt : <<include>>
+UC_SearchPayments ..> UC_ViewPayments : <<include>>
+UC_SearchDebt ..> UC_ViewDebt : <<include>>
+@enduml

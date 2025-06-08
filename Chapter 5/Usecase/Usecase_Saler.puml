@@ -1,0 +1,66 @@
+@startuml Usecase_Saler
+!theme plain
+
+left to right direction
+actor "Nhân viên Bán hàng" as Saler
+
+rectangle "Structura Steel System" {
+    usecase "Đăng nhập" as UC_Login
+
+    ' --- Quản lý Đơn hàng Bán ---
+    usecase "Tạo Đơn hàng Bán" as UC_CreateSale
+    usecase "Xem Đơn hàng Bán" as UC_ViewSale
+    usecase "Cập nhật Đơn hàng Bán" as UC_UpdateSale
+    usecase "Xoá Đơn hàng Bán" as UC_DeleteSale
+    usecase "Tìm kiếm Đơn hàng Bán" as UC_SearchSale
+
+    ' --- Giao hàng ---
+    usecase "Tạo Đơn Giao hàng (Bán)" as UC_CreateDelivery
+    usecase "Xem Đơn Giao hàng" as UC_ViewDelivery
+    usecase "Cập nhật trạng thái Giao hàng" as UC_UpdateDelivery
+    usecase "Xoá Đơn Giao hàng" as UC_DeleteDelivery
+
+    ' --- Đối tác ---
+    usecase "Xem Đối tác (Khách hàng)" as UC_ViewPartner
+    usecase "Thêm/Sửa Đối tác (Khách hàng)" as UC_EditPartner
+    usecase "Xoá Đối tác (Khách hàng)" as UC_DeletePartner
+    usecase "Tìm kiếm Đối tác" as UC_SearchPartner
+
+    ' --- Sản phẩm ---
+    usecase "Xem Sản phẩm" as UC_ViewProduct
+    usecase "Tìm kiếm Sản phẩm" as UC_SearchProduct
+
+    ' --- Công nợ ---
+    usecase "Xem Công nợ Đơn hàng Bán" as UC_ViewSaleDebt
+}
+
+' --- Quan hệ ---
+Saler -- UC_Login
+Saler -- UC_CreateSale
+Saler -- UC_ViewSale
+Saler -- UC_UpdateSale
+Saler -- UC_DeleteSale
+Saler -- UC_SearchSale
+
+Saler -- UC_CreateDelivery
+Saler -- UC_ViewDelivery
+Saler -- UC_UpdateDelivery
+Saler -- UC_DeleteDelivery
+
+Saler -- UC_ViewPartner
+Saler -- UC_EditPartner
+Saler -- UC_DeletePartner
+Saler -- UC_SearchPartner
+
+Saler -- UC_ViewProduct
+Saler -- UC_SearchProduct
+
+Saler -- UC_ViewSaleDebt
+
+' --- Include ---
+UC_CreateSale ..> UC_ViewPartner : <<include>>
+UC_CreateSale ..> UC_ViewProduct : <<include>>
+UC_SearchSale ..> UC_ViewSale : <<include>>
+UC_SearchPartner ..> UC_ViewPartner : <<include>>
+UC_SearchProduct ..> UC_ViewProduct : <<include>>
+@enduml

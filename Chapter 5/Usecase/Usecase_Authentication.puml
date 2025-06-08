@@ -1,0 +1,44 @@
+@startuml Usecase_Authentication
+!theme plain
+
+left to right direction
+actor "Người dùng (User)" as User
+
+rectangle "Structura Steel System" {
+
+    usecase "Đăng nhập" as UC_Login
+    usecase "Đăng xuất" as UC_Logout
+
+    usecase "Đăng nhập lần đầu\n(phải đổi mật khẩu)" as UC_FirstLoginChange
+    usecase "Quên mật khẩu" as UC_ForgotPassword
+    usecase "Gửi OTP về Email" as UC_SendOtp
+    usecase "Xác thực OTP" as UC_VerifyOtp
+    usecase "Đổi mật khẩu mới" as UC_ResetPassword
+
+    usecase "Nhận Email\n(kèm mật khẩu mặc định)" as UC_ReceiveEmail
+
+}
+
+User --> UC_Login
+User --> UC_Logout
+User --> UC_ForgotPassword
+User --> UC_FirstLoginChange
+User --> UC_ResetPassword
+
+' Include relationships
+UC_ForgotPassword --> UC_SendOtp : <<include>>
+UC_SendOtp --> UC_VerifyOtp : <<include>>
+UC_VerifyOtp --> UC_ResetPassword : <<include>>
+
+note right of UC_VerifyOtp
+Sai quá 3 lần → Khoá 5 phút
+end note
+
+note right of UC_ForgotPassword
+Sai email quá 5 lần → Khoá 5 phút
+end note
+
+UC_ReceiveEmail ..> UC_Login : <<include>>
+UC_FirstLoginChange ..> UC_Login : <<include>>
+
+@enduml

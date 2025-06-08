@@ -1,0 +1,53 @@
+@startuml Usecase_Admin
+!theme plain
+
+left to right direction
+actor Admin
+
+rectangle "Structura Steel System" {
+            
+     usecase "Đăng nhập" as UC_Login
+
+    ' --- Quản trị người dùng và phân quyền ---
+    usecase "Quản lý Người dùng\n(Thêm/Sửa/Xóa)" as UC_ManageUsers
+    usecase "Phân quyền cho Người dùng" as UC_AssignRoles
+
+    ' --- Quản lý sản phẩm ---
+    usecase "Quản lý Sản phẩm\n(Thêm/Sửa/Xóa)" as UC_ManageProducts
+
+    ' --- Quản lý Đối tác (Partner) & các thực thể con ---
+    usecase "Thêm/Sửa/Xóa Đối tác" as UC_CRUDPartner
+    usecase "Thêm/Sửa/Xóa Dự án (Project)" as UC_CRUDProject
+    usecase "Thêm/Sửa/Xóa Kho (Warehouse)" as UC_CRUDWarehouse
+    usecase "Thêm/Sửa/Xóa Phương tiện (Vehicle)" as UC_CRUDVehicle
+
+    ' --- Quản lý Đơn hàng ---
+    usecase "Thêm/Sửa/Xóa Đơn hàng Bán" as UC_CRUDSale
+    usecase "Thêm/Sửa/Xóa Đơn hàng Mua" as UC_CRUDPurchase
+    usecase "Thêm/Sửa/Xóa Đơn Giao hàng" as UC_CRUDDelivery
+    usecase "Hủy Đơn hàng" as UC_CancelOrders
+
+    ' --- Công cụ và Quản trị ---
+    usecase "Xem Toàn bộ Báo cáo" as UC_ViewAllReports
+    usecase "Xóa vĩnh viễn Dữ liệu" as UC_HardDelete
+}
+
+' --- Kết nối giữa Admin và các use case ---
+Admin -- UC_Login
+Admin -- UC_ManageUsers
+Admin -- UC_AssignRoles
+Admin -- UC_ManageProducts
+
+Admin -- UC_CRUDPartner
+Admin -- UC_CRUDProject
+Admin -- UC_CRUDWarehouse
+Admin -- UC_CRUDVehicle
+
+Admin -- UC_CRUDSale
+Admin -- UC_CRUDPurchase
+Admin -- UC_CRUDDelivery
+Admin -- UC_CancelOrders
+
+Admin -- UC_HardDelete
+Admin -- UC_ViewAllReports
+@enduml

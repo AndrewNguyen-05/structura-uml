@@ -1,0 +1,62 @@
+@startuml Usecase_Importer
+!theme plain
+
+left to right direction
+actor "Nhân viên Mua hàng" as Importer
+
+rectangle "Structura Steel System" {
+
+    usecase "Đăng nhập" as UC_Login
+    usecase "Tạo Đơn hàng Mua" as UC_CreatePurchase
+    usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
+    usecase "Cập nhật Đơn hàng Mua" as UC_UpdatePurchase
+    usecase "Xóa Đơn hàng Mua" as UC_DeletePurchase
+
+    usecase "Tạo Đơn Giao hàng (Mua)" as UC_CreateDelivery
+    usecase "Xem Đơn Giao hàng" as UC_ViewDelivery
+    usecase "Cập nhật trạng thái Giao hàng" as UC_UpdateDelivery
+    usecase "Xóa Đơn Giao hàng" as UC_DeleteDelivery
+
+    usecase "Xem Đối tác (Nhà cung cấp)" as UC_ViewPartner
+    usecase "Thêm/Sửa Đối tác (Nhà cung cấp)" as UC_EditPartner
+    usecase "Xóa Đối tác" as UC_DeletePartner
+
+    usecase "Xem Sản phẩm" as UC_ViewProduct
+
+    usecase "Xem Công nợ Đơn hàng Mua" as UC_ViewPurchaseDebt
+
+    usecase "Tìm kiếm Đơn hàng Mua" as UC_SearchPurchase
+    usecase "Tìm kiếm Đối tác" as UC_SearchPartner
+    usecase "Tìm kiếm Sản phẩm" as UC_SearchProduct
+}
+
+' Quyền của Importer
+Importer -- UC_Login
+Importer -- UC_CreatePurchase
+Importer -- UC_ViewPurchase
+Importer -- UC_UpdatePurchase
+Importer -- UC_DeletePurchase
+
+Importer -- UC_CreateDelivery
+Importer -- UC_ViewDelivery
+Importer -- UC_UpdateDelivery
+Importer -- UC_DeleteDelivery
+
+Importer -- UC_EditPartner
+Importer -- UC_ViewPartner
+Importer -- UC_DeletePartner
+
+Importer -- UC_ViewProduct
+Importer -- UC_ViewPurchaseDebt
+
+Importer -- UC_SearchPurchase
+Importer -- UC_SearchPartner
+Importer -- UC_SearchProduct
+
+' Các include relationships
+UC_CreatePurchase ..> UC_ViewPartner : <<include>>
+UC_CreatePurchase ..> UC_ViewProduct : <<include>>
+UC_SearchPurchase ..> UC_ViewPurchase : <<include>>
+UC_SearchPartner ..> UC_ViewPartner : <<include>>
+UC_SearchProduct ..> UC_ViewProduct : <<include>>
+@enduml
