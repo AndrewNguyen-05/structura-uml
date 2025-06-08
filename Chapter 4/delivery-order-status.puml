@@ -1,0 +1,6 @@
+@startuml delivery-order-status
+[*] --> NEW
+NEW --> IN_TRANSIT : Giao hàng
+IN_TRANSIT --> DELIVERED : Xác nhận bên nhận
+DELIVERED --> DONE : Công nợ = 0 hoặc bị hủy
+@enduml

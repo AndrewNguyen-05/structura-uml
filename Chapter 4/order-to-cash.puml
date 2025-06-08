@@ -1,0 +1,31 @@
+@startuml order-to-cash
+start
+:Tiếp nhận yêu cầu từ đối tác;
+:Khởi tạo Sale Order (NEW);
+:Khởi tạo Purchase Order (NEW);
+:Chuyển Sale Order -> PROCESSING;
+
+:Khởi tạo Delivery Order (Purchase);
+:Chờ xác nhận nhà cung cấp;
+if (Nhà cung cấp đồng ý?) then (Yes)
+  :Purchase Order -> PROCESSING;
+  :Delivery Purchase -> IN_TRANSIT;
+  :Nhận hàng -> Delivery Purchase DELIVERED;
+  :Purchase Order -> DELIVERED;
+  :Chuyển trạng thái Purchase -> DONE (nếu không có nợ);
+  :Tạo Delivery Order (Sale);
+  :Chờ xác nhận khách hàng;
+  :Giao hàng (IN_TRANSIT);
+  :Xác nhận đã nhận hàng;
+  :Delivery Sale -> DELIVERED;
+  :Check công nợ;
+  if (Công nợ = 0?) then (Yes)
+    :Sale Order -> DONE;
+  else
+    :Chờ thanh toán;
+  endif
+else
+  :Hủy đơn / Thông báo lỗi;
+endif
+stop
+@enduml

@@ -1,0 +1,15 @@
+@startuml supply_chain
+actor "Customer (Khách hàng)" as Customer
+actor "Steel Supplier (Nhà cung cấp)" as Supplier
+actor "Transporter (Đơn vị vận chuyển)" as Transporter
+entity "Management System" as System
+
+Customer -> System : Tạo Sale Order
+System -> Supplier : Tạo Purchase Order
+System -> Transporter : Tạo Delivery Order (Purchase)
+Supplier --> System : Xác nhận và giao hàng (IN_TRANSIT)
+System -> Customer : Tạo Delivery Order (Sale)
+Transporter -> Customer : Giao hàng
+Customer --> System : Xác nhận đã nhận
+System --> Customer : Theo dõi công nợ
+@enduml

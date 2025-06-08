@@ -1,0 +1,21 @@
+@startuml test
+!theme plain
+top to bottom direction
+
+actor "Nhà cung cấp" as Supplier
+actor "Đơn vị phân phối" as Distributor
+actor "Khách hàng" as Customer
+actor "Đơn vị vận chuyển" as Transporter
+
+rectangle "Chuỗi cung ứng thép" {
+  Supplier -> Distributor : Cung cấp thép
+  Distributor -> Customer : Bán thép
+  Transporter -> Distributor : Vận chuyển nhập
+  Transporter -> Distributor : Vận chuyển xuất
+  Customer --> Distributor : Đặt hàng (Sale Order)
+  Distributor --> Supplier : Đặt mua (Purchase Order)
+  Distributor --> Transporter : Tạo đơn giao hàng
+}
+
+note right of Distributor: Ứng dụng quản lý tập trung\n vào hoạt động của đơn vị phân phối
+@enduml

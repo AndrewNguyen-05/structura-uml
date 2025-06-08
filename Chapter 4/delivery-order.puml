@@ -1,0 +1,20 @@
+@startuml delivery-order
+start
+:Tạo Delivery Order (NEW);
+if (Purchase?) then (Yes)
+  :Chờ xác nhận từ Supplier;
+  :Delivery -> IN_TRANSIT;
+else
+  :Chờ xác nhận từ Customer;
+  :Delivery -> IN_TRANSIT;
+endif
+
+:Vận chuyển;
+:Xác nhận đã nhận hàng;
+:Delivery -> DELIVERED;
+:Kiểm tra công nợ;
+if (Nợ = 0 hoặc Cancelled?) then (Yes)
+  :Delivery -> DONE;
+endif
+stop
+@enduml

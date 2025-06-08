@@ -1,0 +1,7 @@
+@startuml purchase-order-status
+[*] --> NEW
+NEW --> PROCESSING : Supplier xác nhận
+PROCESSING --> IN_TRANSIT : Delivery Order (Purchase)
+IN_TRANSIT --> DELIVERED : Đã nhận hàng
+DELIVERED --> DONE : Đã thanh toán / hết nợ
+@enduml

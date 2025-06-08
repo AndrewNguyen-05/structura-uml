@@ -1,0 +1,7 @@
+@startuml sale-order-status
+[*] --> NEW
+NEW --> PROCESSING : Tạo Purchase Order
+PROCESSING --> IN_TRANSIT : Tạo Delivery (Sale)
+IN_TRANSIT --> DELIVERED : Xác nhận đã nhận
+DELIVERED --> DONE : Hết nợ / debt CANCELLED
+@enduml

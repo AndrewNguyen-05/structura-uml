@@ -1,0 +1,21 @@
+@startuml procure-to-pay
+start
+:Tạo Purchase Order (NEW);
+:Chờ xác nhận từ Supplier;
+if (Supplier xác nhận) then (Yes)
+  :Purchase Order -> PROCESSING;
+  :Tạo Delivery Order (Purchase);
+  :Giao hàng (IN_TRANSIT);
+  :Nhận hàng -> Delivery -> DELIVERED;
+  :Purchase Order -> DELIVERED;
+  :Check công nợ;
+  if (Đã thanh toán?) then (Yes)
+    :Purchase Order -> DONE;
+  else
+    :Chờ trả nợ;
+  endif
+else
+  :Thông báo lỗi;
+endif
+stop
+@enduml
