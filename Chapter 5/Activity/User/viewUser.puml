@@ -1,0 +1,24 @@
+@startuml View User
+skin rose
+scale 3
+
+|User|
+start
+:Select "Account";
+|User Interface|
+:Send request to system;
+|System|
+:Handle view account request;
+:Return results;
+|User Interface|
+:Display account list;
+|User|
+:Enter search criteria;
+|User Interface|
+:Send search criteria;
+|System|
+:Search for accounts;
+:Return search results;
+|User Interface|
+:Display search results;
+stop

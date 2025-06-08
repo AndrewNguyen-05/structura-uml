@@ -1,0 +1,33 @@
+@startuml Create User
+skin rose
+scale 3
+
+|User|
+start
+:Select "Create User";
+|User Interface|
+:Display form;
+|User|
+:Enter user details;
+:Click "Create";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle add user request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save user information;
+  :Return add success;
+  |User Interface|
+  :Display success message;
+  :Get updated user list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

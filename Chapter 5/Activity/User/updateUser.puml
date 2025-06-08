@@ -1,0 +1,33 @@
+@startuml Update User
+skin rose
+scale 3
+
+|User|
+start
+:Select "Edit" in user row;
+|User Interface|
+:Display form;
+|User|
+:Enter edited details;
+:Click "Update";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update user request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save user information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Get updated user list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

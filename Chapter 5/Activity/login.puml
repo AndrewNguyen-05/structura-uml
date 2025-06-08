@@ -1,0 +1,26 @@
+@startuml Login
+skin rose
+scale 3
+|User|
+start
+:Enter credentials;
+|User Interface|
+:Send credentials to System;
+|System|
+:Handle login request;
+:Validate credentials;
+if (Valid?) then (yes)
+  :Process login;
+  :Retrieve user data;
+  :Return login success;
+  |User Interface|
+  :Save credentials to local;
+  :Redirect to homepage;
+else (no)
+  |System|
+  :Return login failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+@enduml
