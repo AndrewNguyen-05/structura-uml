@@ -1,0 +1,23 @@
+@startuml Delete Purchase Order
+skin rose
+scale 3
+
+|User|
+start
+:Select "Delete" in purchase order row;
+|User Interface|
+:Display confirmation prompt;
+|User|
+:Give reason and confirm deletion;
+|User Interface|
+:Send deletion request;
+|System|
+:Handle delete purchase order request;
+:Delete purchase order information;
+:Return delete success;
+|User Interface|
+:Display success message;
+:Get updated purchase order list;
+stop
+
+@enduml

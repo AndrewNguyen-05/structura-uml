@@ -1,0 +1,26 @@
+@startuml View Partner
+skin rose
+scale 3
+
+|User|
+start
+:Select "Partner";
+|User Interface|
+:Send request to system;
+|System|
+:Handle view partner request;
+:Return results;
+|User Interface|
+:Display partner list;
+|User|
+:Enter search criteria;
+|User Interface|
+:Send search criteria;
+|System|
+:Search for partners;
+:Return search results;
+|User Interface|
+:Display search results;
+stop
+
+@enduml

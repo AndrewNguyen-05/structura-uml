@@ -1,0 +1,34 @@
+@startuml Create Sale Order
+skin rose
+scale 3
+
+|User|
+start
+:Select "Create Sale Order";
+|User Interface|
+:Display form;
+|User|
+:Enter sale order details;
+:Add products to order;
+:Click "Create";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle add sale order request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save sale order information;
+  :Return add success;
+  |User Interface|
+  :Display success message;
+  :Get updated sale order list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

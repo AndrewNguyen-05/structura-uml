@@ -1,0 +1,23 @@
+@startuml Delete Partner
+skin rose
+scale 3
+
+|User|
+start
+:Select "Delete" in partner row;
+|User Interface|
+:Display confirmation prompt;
+|User|
+:Confirm deletion;
+|User Interface|
+:Send deletion request;
+|System|
+:Handle delete partner request;
+:Delete partner information;
+:Return delete success;
+|User Interface|
+:Display success message;
+:Get updated partner list;
+stop
+
+@enduml

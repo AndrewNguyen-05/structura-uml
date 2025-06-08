@@ -1,0 +1,33 @@
+@startuml Update Product
+skin rose
+scale 3
+
+|User|
+start
+:Select "Edit" in product row;
+|User Interface|
+:Display form;
+|User|
+:Enter edited product details;
+:Click "Update";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update product request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save product information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Get updated product list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml View Product
+skin rose
+scale 3
+
+|User|
+start
+:Select "Product";
+|User Interface|
+:Send request to system;
+|System|
+:Handle view product request;
+:Return results;
+|User Interface|
+:Display product list;
+|User|
+:Enter search criteria;
+|User Interface|
+:Send search criteria;
+|System|
+:Search for products;
+:Return search results;
+|User Interface|
+:Display search results;
+stop
+@enduml

@@ -1,0 +1,22 @@
+@startuml Delete Product
+skin rose
+scale 3
+
+|User|
+start
+:Select "Delete" in product row;
+|User Interface|
+:Display confirmation prompt;
+|User|
+:Confirm deletion;
+|User Interface|
+:Send deletion request;
+|System|
+:Handle delete product request;
+:Delete product information;
+:Return delete success;
+|User Interface|
+:Display success message;
+:Get updated product list;
+stop
+@enduml

@@ -1,0 +1,33 @@
+@startuml Create Partner
+skin rose
+scale 3
+
+|User|
+start
+:Select "Create Partner";
+|User Interface|
+:Display form;
+|User|
+:Enter partner details;
+:Click "Create";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle add partner request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save partner information;
+  :Return add success;
+  |User Interface|
+  :Display success message;
+  :Get updated partner list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml Update Project
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Projects section;
+:Select "Edit" on project row;
+|User Interface|
+:Display project form with existing data;
+|User|
+:Update project details;
+:Click "Save";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update project request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save project information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Show updated project details;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

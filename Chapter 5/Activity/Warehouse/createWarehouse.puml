@@ -1,0 +1,34 @@
+@startuml Create Warehouse
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Click "Add Warehouse";
+|User Interface|
+:Display warehouse form;
+|User|
+:Enter warehouse details;
+:Click "Create";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle add warehouse request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save warehouse information;
+  :Return add success;
+  |User Interface|
+  :Display success message;
+  :Show updated partner details with new warehouse;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

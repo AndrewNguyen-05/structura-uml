@@ -1,0 +1,31 @@
+@startuml View Warehouse
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Warehouses section;
+|User Interface|
+:Send request to system;
+|System|
+:Handle retrieve partner's warehouses request;
+:Return results;
+|User Interface|
+:Display warehouses list;
+|User|
+:Enter search criteria (if needed);
+|User Interface|
+:Filter warehouses list;
+|User|
+:Click on warehouse for details;
+|User Interface|
+:Send warehouse details request;
+|System|
+:Retrieve warehouse details;
+:Return warehouse data;
+|User Interface|
+:Display warehouse details;
+stop
+
+@enduml

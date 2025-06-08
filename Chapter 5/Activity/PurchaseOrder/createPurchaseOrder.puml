@@ -1,0 +1,34 @@
+@startuml Create Purchase Order
+skin rose
+scale 3
+
+|User|
+start
+:Select "Create Purchase Order";
+|User Interface|
+:Display form;
+|User|
+:Enter purchase order details;
+:Add products to order;
+:Click "Create";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle add purchase order request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save purchase order information;
+  :Return add success;
+  |User Interface|
+  :Display success message;
+  :Get updated purchase order list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

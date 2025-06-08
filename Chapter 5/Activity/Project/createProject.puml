@@ -1,0 +1,34 @@
+@startuml Create Project
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Click "Add Project";
+|User Interface|
+:Display project form;
+|User|
+:Enter project details;
+:Click "Create";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle add project request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save project information;
+  :Return add success;
+  |User Interface|
+  :Display success message;
+  :Show updated partner details with new project;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

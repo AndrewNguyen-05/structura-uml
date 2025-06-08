@@ -1,0 +1,35 @@
+@startuml Update Vehicle
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Vehicles section;
+:Select "Edit" on vehicle row;
+|User Interface|
+:Display vehicle form with existing data;
+|User|
+:Update vehicle details;
+:Click "Save";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update vehicle request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save vehicle information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Show updated vehicle details;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

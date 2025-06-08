@@ -1,0 +1,34 @@
+@startuml Update Delivery Order
+skin rose
+scale 3
+
+|User|
+start
+:Select "Edit" in delivery order row;
+|User Interface|
+:Display form;
+|User|
+:Enter edited delivery details;
+:Update status or quantities;
+:Click "Update";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update delivery order request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save delivery order information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Get updated delivery order list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

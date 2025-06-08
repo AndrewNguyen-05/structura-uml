@@ -1,0 +1,23 @@
+@startuml Delete Delivery Order
+skin rose
+scale 3
+
+|User|
+start
+:Select "Delete" in delivery order row;
+|User Interface|
+:Display confirmation prompt;
+|User|
+:Give reason and confirm deletion;
+|User Interface|
+:Send deletion request;
+|System|
+:Handle delete delivery order request;
+:Delete delivery order information;
+:Return delete success;
+|User Interface|
+:Display success message;
+:Get updated delivery order list;
+stop
+
+@enduml

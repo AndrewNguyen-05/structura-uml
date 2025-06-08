@@ -1,0 +1,35 @@
+@startuml Update Warehouse
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Warehouses section;
+:Select "Edit" on warehouse row;
+|User Interface|
+:Display warehouse form with existing data;
+|User|
+:Update warehouse details;
+:Click "Save";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update warehouse request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save warehouse information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Show updated warehouse details;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml

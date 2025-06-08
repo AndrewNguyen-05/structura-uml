@@ -1,0 +1,33 @@
+@startuml Delete Vehicle
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Vehicles section;
+:Select "Delete" on vehicle row;
+|User Interface|
+:Display confirmation prompt;
+|User|
+:Confirm deletion;
+|User Interface|
+:Send deletion request;
+|System|
+:Handle delete vehicle request;
+:Check vehicle dependencies;
+if (Can be deleted?) then (yes)
+  :Delete vehicle information;
+  :Return delete success;
+  |User Interface|
+  :Display success message;
+  :Update vehicles list;
+else (no)
+  |System|
+  :Return deletion failure;
+  |User Interface|
+  :Display error message with reasons;
+endif
+stop
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml Delete Warehouse
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Warehouses section;
+:Select "Delete" on warehouse row;
+|User Interface|
+:Display confirmation prompt;
+|User|
+:Confirm deletion;
+|User Interface|
+:Send deletion request;
+|System|
+:Handle delete warehouse request;
+:Check warehouse dependencies;
+if (Can be deleted?) then (yes)
+  :Delete warehouse information;
+  :Return delete success;
+  |User Interface|
+  :Display success message;
+  :Update warehouses list;
+else (no)
+  |System|
+  :Return deletion failure;
+  |User Interface|
+  :Display error message with reasons;
+endif
+stop
+
+@enduml

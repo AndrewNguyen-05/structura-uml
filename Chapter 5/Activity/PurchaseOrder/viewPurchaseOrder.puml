@@ -1,0 +1,26 @@
+@startuml View Purchase Order
+skin rose
+scale 3
+
+|User|
+start
+:Select "Purchase Orders";
+|User Interface|
+:Send request to system;
+|System|
+:Handle view purchase order request;
+:Return results;
+|User Interface|
+:Display purchase order list;
+|User|
+:Enter search criteria;
+|User Interface|
+:Send search criteria;
+|System|
+:Search for purchase orders;
+:Return search results;
+|User Interface|
+:Display search results;
+stop
+
+@enduml

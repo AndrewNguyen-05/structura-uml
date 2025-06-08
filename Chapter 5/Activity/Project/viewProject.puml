@@ -1,0 +1,31 @@
+@startuml View Project
+skin rose
+scale 3
+
+|User|
+start
+:Select Partner;
+:Scroll to Projects section;
+|User Interface|
+:Send request to system;
+|System|
+:Handle retrieve partner's projects request;
+:Return results;
+|User Interface|
+:Display projects list;
+|User|
+:Enter search criteria (if needed);
+|User Interface|
+:Filter projects list;
+|User|
+:Click on project for details;
+|User Interface|
+:Send project details request;
+|System|
+:Retrieve project details;
+:Return project data;
+|User Interface|
+:Display project details;
+stop
+
+@enduml

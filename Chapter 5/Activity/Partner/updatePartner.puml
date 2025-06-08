@@ -1,0 +1,33 @@
+@startuml Update Partner
+skin rose
+scale 3
+
+|User|
+start
+:Select "Edit" in partner row;
+|User Interface|
+:Display form;
+|User|
+:Enter edited partner details;
+:Click "Update";
+|User Interface|
+:Validate form;
+:Send request to system;
+|System|
+:Handle update partner request;
+:Validate details;
+if (Valid?) then (yes)
+  :Save partner information;
+  :Return edit success;
+  |User Interface|
+  :Display success message;
+  :Get updated partner list;
+else (no)
+  |System|
+  :Return validation failure;
+  |User Interface|
+  :Display error message;
+endif
+stop
+
+@enduml
