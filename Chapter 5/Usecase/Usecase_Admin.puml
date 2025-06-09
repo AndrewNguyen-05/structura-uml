@@ -5,49 +5,116 @@ left to right direction
 actor Admin
 
 rectangle "Structura Steel System" {
-            
-     usecase "Đăng nhập" as UC_Login
 
-    ' --- Quản trị người dùng và phân quyền ---
-    usecase "Quản lý Người dùng\n(Thêm/Sửa/Xóa)" as UC_ManageUsers
-    usecase "Phân quyền cho Người dùng" as UC_AssignRoles
+  usecase "Đăng nhập" as UC_Login
+  usecase "Đăng xuất" as UC_Logout
 
-    ' --- Quản lý sản phẩm ---
-    usecase "Quản lý Sản phẩm\n(Thêm/Sửa/Xóa)" as UC_ManageProducts
+  package "Quản trị Người dùng" {
+    usecase "Thêm Người dùng" as UC_AddUser
+    usecase "Sửa Người dùng" as UC_EditUser
+    usecase "Xóa Người dùng" as UC_DeleteUser
+    usecase "Phân quyền" as UC_AssignRoles
+    usecase "Tìm kiếm Người dùng" as UC_SearchUser
+    usecase "Xem Người dùng" as UC_ViewUser
+  }
 
-    ' --- Quản lý Đối tác (Partner) & các thực thể con ---
-    usecase "Thêm/Sửa/Xóa Đối tác" as UC_CRUDPartner
-    usecase "Thêm/Sửa/Xóa Dự án (Project)" as UC_CRUDProject
-    usecase "Thêm/Sửa/Xóa Kho (Warehouse)" as UC_CRUDWarehouse
-    usecase "Thêm/Sửa/Xóa Phương tiện (Vehicle)" as UC_CRUDVehicle
+  package "Sản phẩm" {
+    usecase "Thêm Sản phẩm" as UC_AddProduct
+    usecase "Sửa Sản phẩm" as UC_EditProduct
+    usecase "Xóa Sản phẩm" as UC_DeleteProduct
+    usecase "Tìm kiếm Sản phẩm" as UC_SearchProduct
+    usecase "Xem Sản phẩm" as UC_ViewProduct
+  }
 
-    ' --- Quản lý Đơn hàng ---
-    usecase "Thêm/Sửa/Xóa Đơn hàng Bán" as UC_CRUDSale
-    usecase "Thêm/Sửa/Xóa Đơn hàng Mua" as UC_CRUDPurchase
-    usecase "Thêm/Sửa/Xóa Đơn Giao hàng" as UC_CRUDDelivery
+  package "Đối tác" {
+    usecase "Thêm Đối tác" as UC_AddPartner
+    usecase "Sửa Đối tác" as UC_EditPartner
+    usecase "Xóa Đối tác" as UC_DeletePartner
+    usecase "Tìm kiếm Đối tác" as UC_SearchPartner
+    usecase "Xem Đối tác" as UC_ViewPartner
+  }
+
+  package "Dự án" {
+    usecase "Thêm Dự án" as UC_AddProject
+    usecase "Sửa Dự án" as UC_EditProject
+    usecase "Xóa Dự án" as UC_DeleteProject
+    usecase "Tìm kiếm Dự án" as UC_SearchProject
+    usecase "Xem Dự án" as UC_ViewProject
+  }
+
+  package "Kho" {
+    usecase "Thêm Kho" as UC_AddWarehouse
+    usecase "Sửa Kho" as UC_EditWarehouse
+    usecase "Xóa Kho" as UC_DeleteWarehouse
+    usecase "Tìm kiếm Kho" as UC_SearchWarehouse
+    usecase "Xem Kho" as UC_ViewWarehouse
+  }
+
+  package "Phương tiện" {
+    usecase "Thêm Phương tiện" as UC_AddVehicle
+    usecase "Sửa Phương tiện" as UC_EditVehicle
+    usecase "Xóa Phương tiện" as UC_DeleteVehicle
+    usecase "Tìm kiếm Phương tiện" as UC_SearchVehicle
+    usecase "Xem Phương tiện" as UC_ViewVehicle
+  }
+
+  package "Đơn hàng Bán" {
+    usecase "Thêm Đơn hàng Bán" as UC_AddSale
+    usecase "Sửa Đơn hàng Bán" as UC_EditSale
+    usecase "Xóa Đơn hàng Bán" as UC_DeleteSale
+    usecase "Tìm kiếm Đơn hàng Bán" as UC_SearchSale
+    usecase "Xem Đơn hàng Bán" as UC_ViewSale
+  }
+
+  package "Đơn hàng Mua" {
+    usecase "Thêm Đơn hàng Mua" as UC_AddPurchase
+    usecase "Sửa Đơn hàng Mua" as UC_EditPurchase
+    usecase "Xóa Đơn hàng Mua" as UC_DeletePurchase
+    usecase "Tìm kiếm Đơn hàng Mua" as UC_SearchPurchase
+    usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
+  }
+
+  package "Đơn Giao hàng" {
+    usecase "Thêm Đơn Giao hàng" as UC_AddDelivery
+    usecase "Sửa Đơn Giao hàng" as UC_EditDelivery
+    usecase "Xóa Đơn Giao hàng" as UC_DeleteDelivery
+    usecase "Tìm kiếm Đơn Giao hàng" as UC_SearchDelivery
+    usecase "Xem Đơn Giao hàng" as UC_ViewDelivery
     usecase "Hủy Đơn hàng" as UC_CancelOrders
+  }
 
-    ' --- Công cụ và Quản trị ---
+  package "Công nợ" {
+    usecase "Thêm Công nợ" as UC_AddDebt
+    usecase "Sửa Công nợ" as UC_EditDebt
+    usecase "Xóa Công nợ" as UC_DeleteDebt
+    usecase "Xem Công nợ" as UC_ViewDebt
+  }
+
+  package "Lịch sử trả nợ" {
+    usecase "Sửa Lịch sử trả nợ" as UC_EditDebtHistory
+    usecase "Xóa Lịch sử trả nợ" as UC_DeleteDebtHistory
+    usecase "Xem Lịch sử trả nợ" as UC_ViewDebtHistory
+  }
+
+  package "Công cụ & Báo cáo" {
     usecase "Xem Toàn bộ Báo cáo" as UC_ViewAllReports
     usecase "Xóa vĩnh viễn Dữ liệu" as UC_HardDelete
+  }
 }
 
-' --- Kết nối giữa Admin và các use case ---
+' Kết nối rút gọn tới các nhóm chức năng
+Admin -down-> (Quản trị Người dùng)
+Admin -down-> (Sản phẩm)
+Admin -down-> (Đối tác)
+Admin -down-> (Dự án)
+Admin -down-> (Kho)
+Admin -down-> (Phương tiện)
+Admin -down-> (Đơn hàng Bán)
+Admin -down-> (Đơn hàng Mua)
+Admin -down-> (Đơn Giao hàng)
+Admin -down-> (Công nợ)
+Admin -down-> (Lịch sử trả nợ)
+Admin -down-> (Công cụ & Báo cáo)
 Admin -- UC_Login
-Admin -- UC_ManageUsers
-Admin -- UC_AssignRoles
-Admin -- UC_ManageProducts
-
-Admin -- UC_CRUDPartner
-Admin -- UC_CRUDProject
-Admin -- UC_CRUDWarehouse
-Admin -- UC_CRUDVehicle
-
-Admin -- UC_CRUDSale
-Admin -- UC_CRUDPurchase
-Admin -- UC_CRUDDelivery
-Admin -- UC_CancelOrders
-
-Admin -- UC_HardDelete
-Admin -- UC_ViewAllReports
+Admin -- UC_Logout
 @enduml

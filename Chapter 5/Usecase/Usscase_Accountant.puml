@@ -6,44 +6,83 @@ actor "Kế toán" as Accountant
 
 rectangle "Structura Steel System" {
     usecase "Đăng nhập" as UC_Login
+    usecase "Đăng xuất" as UC_Logout
 
-    ' --- Thanh toán ---
-    usecase "Thực hiện Thanh toán" as UC_MakePayment
-    usecase "Xem Lịch sử Thanh toán" as UC_ViewPayments
-    usecase "Tìm kiếm Thanh toán" as UC_SearchPayments
+    ' --- Gói chức năng Tài chính & Kế toán ---
+    package "Quản lý Tài chính & Kế toán" {
+        package "Thanh toán" {
+            usecase "Thực hiện Thanh toán" as UC_MakePayment
+            usecase "Xem Lịch sử Thanh toán" as UC_ViewPayments
+            usecase "Tìm kiếm Thanh toán" as UC_SearchPayments
+        }
+        package "Công nợ" {
+            usecase "Xem chi tiết Công nợ" as UC_ViewDebt
+            usecase "Cập nhật trạng thái Công nợ" as UC_UpdateDebtStatus
+            usecase "Tìm kiếm Công nợ" as UC_SearchDebt
+        }
+    }
 
-    ' --- Công nợ ---
-    usecase "Xem chi tiết Công nợ" as UC_ViewDebt
-    usecase "Cập nhật trạng thái Công nợ" as UC_UpdateDebtStatus
-    usecase "Tìm kiếm Công nợ" as UC_SearchDebt
+    ' --- Gói chức năng Tra cứu Đơn hàng ---
+    package "Tra cứu Đơn hàng" {
+        usecase "Xem Đơn hàng Bán" as UC_ViewSale
+        usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
+        usecase "Xem Đơn hàng Giao hàng" as UC_ViewDelivery
+    }
 
-    ' --- Đơn hàng ---
-    usecase "Xem Đơn hàng Bán" as UC_ViewSale
-    usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
-    usecase "Xem Đơn hàng Giao hàng" as UC_ViewDelivery
-
-    ' --- Đối tác ---
-    usecase "Xem thông tin Đối tác" as UC_ViewPartner
+    ' --- Gói chức năng Quản lý Dữ liệu ---
+    package "Quản lý Dữ liệu Chung" {
+        package "Đối tác" {
+            usecase "Thêm Đối tác" as UC_AddPartner
+            usecase "Sửa Đối tác" as UC_EditPartner
+            usecase "Xóa Đối tác" as UC_DeletePartner
+            usecase "Xem Đối tác" as UC_ViewPartner
+            usecase "Tìm kiếm Đối tác" as UC_SearchPartner
+        }
+        package "Sản phẩm" {
+            usecase "Thêm Sản phẩm" as UC_AddProduct
+            usecase "Sửa Sản phẩm" as UC_EditProduct
+            usecase "Xóa Sản phẩm" as UC_DeleteProduct
+            usecase "Xem Sản phẩm" as UC_ViewProduct
+            usecase "Tìm kiếm Sản phẩm" as UC_SearchProduct
+        }
+        package "Dự án" {
+            usecase "Thêm Dự án" as UC_AddProject
+            usecase "Sửa Dự án" as UC_EditProject
+            usecase "Xóa Dự án" as UC_DeleteProject
+            usecase "Xem Dự án" as UC_ViewProject
+            usecase "Tìm kiếm Dự án" as UC_SearchProject
+        }
+        package "Kho" {
+            usecase "Thêm Kho" as UC_AddWarehouse
+            usecase "Sửa Kho" as UC_EditWarehouse
+            usecase "Xóa Kho" as UC_DeleteWarehouse
+            usecase "Xem Kho" as UC_ViewWarehouse
+            usecase "Tìm kiếm Kho" as UC_SearchWarehouse
+        }
+        package "Phương tiện" {
+            usecase "Thêm Phương tiện" as UC_AddVehicle
+            usecase "Sửa Phương tiện" as UC_EditVehicle
+            usecase "Xóa Phương tiện" as UC_DeleteVehicle
+            usecase "Xem Phương tiện" as UC_ViewVehicle
+            usecase "Tìm kiếm Phương tiện" as UC_SearchVehicle
+        }
+    }
 }
 
-' --- Quan hệ ---
+' --- Kết nối rút gọn từ Actor tới các Package ---
+Accountant --> (Quản lý Tài chính & Kế toán)
+Accountant --> (Tra cứu Đơn hàng)
+Accountant --> (Quản lý Dữ liệu Chung)
 Accountant -- UC_Login
-Accountant -- UC_MakePayment
-Accountant -- UC_ViewPayments
-Accountant -- UC_SearchPayments
+Accountant -- UC_Logout
 
-Accountant -- UC_ViewDebt
-Accountant -- UC_UpdateDebtStatus
-Accountant -- UC_SearchDebt
 
-Accountant -- UC_ViewSale
-Accountant -- UC_ViewPurchase
-Accountant -- UC_ViewDelivery
-
-Accountant -- UC_ViewPartner
-
-' --- Include ---
+' --- Include relationships (giữ nguyên) ---
 UC_MakePayment ..> UC_ViewDebt : <<include>>
 UC_SearchPayments ..> UC_ViewPayments : <<include>>
 UC_SearchDebt ..> UC_ViewDebt : <<include>>
+UC_SearchPartner ..> UC_ViewPartner : <<include>>
+UC_SearchProduct ..> UC_ViewProduct : <<include>>
+UC_SearchWarehouse ..> UC_ViewWarehouse : <<include>>
+UC_SearchVehicle ..> UC_ViewVehicle : <<include>>
 @enduml

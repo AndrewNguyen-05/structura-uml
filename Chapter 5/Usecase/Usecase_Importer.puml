@@ -6,57 +6,86 @@ actor "Nhân viên Mua hàng" as Importer
 
 rectangle "Structura Steel System" {
 
-    usecase "Đăng nhập" as UC_Login
-    usecase "Tạo Đơn hàng Mua" as UC_CreatePurchase
-    usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
-    usecase "Cập nhật Đơn hàng Mua" as UC_UpdatePurchase
-    usecase "Xóa Đơn hàng Mua" as UC_DeletePurchase
+  usecase "Đăng nhập" as UC_Login
+  usecase "Đăng xuất" as UC_Logout
 
-    usecase "Tạo Đơn Giao hàng (Mua)" as UC_CreateDelivery
-    usecase "Xem Đơn Giao hàng" as UC_ViewDelivery
-    usecase "Cập nhật trạng thái Giao hàng" as UC_UpdateDelivery
-    usecase "Xóa Đơn Giao hàng" as UC_DeleteDelivery
-
-    usecase "Xem Đối tác (Nhà cung cấp)" as UC_ViewPartner
-    usecase "Thêm/Sửa Đối tác (Nhà cung cấp)" as UC_EditPartner
-    usecase "Xóa Đối tác" as UC_DeletePartner
-
-    usecase "Xem Sản phẩm" as UC_ViewProduct
-
+  package "Quản lý Mua hàng" {
+    package "Đơn hàng Mua" {
+      usecase "Tạo Đơn hàng Mua" as UC_CreatePurchase
+      usecase "Xem Đơn hàng Mua" as UC_ViewPurchase
+      usecase "Cập nhật Đơn hàng Mua" as UC_UpdatePurchase
+      usecase "Xóa Đơn hàng Mua" as UC_DeletePurchase
+      usecase "Tìm kiếm Đơn hàng Mua" as UC_SearchPurchase
+    }
+    
+    package "Đơn Giao hàng" {
+      usecase "Tạo Đơn Giao hàng" as UC_CreateDelivery
+      usecase "Xem Đơn Giao hàng" as UC_ViewDelivery
+      usecase "Cập nhật trạng thái Giao hàng" as UC_UpdateDelivery
+      usecase "Xóa Đơn Giao hàng" as UC_DeleteDelivery
+      usecase "Tìm kiếm Đơn Giao hàng" as UC_SearchDelivery
+    }
+    
     usecase "Xem Công nợ Đơn hàng Mua" as UC_ViewPurchaseDebt
+  }
 
-    usecase "Tìm kiếm Đơn hàng Mua" as UC_SearchPurchase
-    usecase "Tìm kiếm Đối tác" as UC_SearchPartner
-    usecase "Tìm kiếm Sản phẩm" as UC_SearchProduct
+  package "Quản lý Dữ liệu Chung" {
+    package "Đối tác (Nhà cung cấp)" {
+      usecase "Thêm Đối tác" as UC_AddPartner
+      usecase "Sửa Đối tác" as UC_EditPartner
+      usecase "Xóa Đối tác" as UC_DeletePartner
+      usecase "Xem Đối tác" as UC_ViewPartner
+      usecase "Tìm kiếm Đối tác" as UC_SearchPartner
+    }
+
+    package "Sản phẩm" {
+      usecase "Thêm Sản phẩm" as UC_AddProduct
+      usecase "Sửa Sản phẩm" as UC_EditProduct
+      usecase "Xóa Sản phẩm" as UC_DeleteProduct
+      usecase "Xem Sản phẩm" as UC_ViewProduct
+      usecase "Tìm kiếm Sản phẩm" as UC_SearchProduct
+    }
+    
+    package "Dự án" {
+      usecase "Thêm Dự án" as UC_AddProject
+      usecase "Sửa Dự án" as UC_EditProject
+      usecase "Xóa Dự án" as UC_DeleteProject
+      usecase "Xem Dự án" as UC_ViewProject
+      usecase "Tìm kiếm Dự án" as UC_SearchProject
+    }
+    
+    package "Phương tiện" {
+      usecase "Thêm Phương tiện" as UC_AddVehicle
+      usecase "Sửa Phương tiện" as UC_EditVehicle
+      usecase "Xóa Phương tiện" as UC_DeleteVehicle
+      usecase "Xem Phương tiện" as UC_ViewVehicle
+      usecase "Tìm kiếm Phương tiện" as UC_SearchVehicle
+    }
+    
+    package "Kho" {
+      usecase "Thêm Kho" as UC_AddWarehouse
+      usecase "Sửa Kho" as UC_EditWarehouse
+      usecase "Xóa Kho" as UC_DeleteWarehouse
+      usecase "Xem Kho" as UC_ViewWarehouse
+      usecase "Tìm kiếm Kho" as UC_SearchWarehouse
+    }
+  }
 }
 
-' Quyền của Importer
+' --- Kết nối rút gọn từ Actor tới các Package ---
+Importer --> (Quản lý Mua hàng)
+Importer --> (Quản lý Dữ liệu Chung)
+
 Importer -- UC_Login
-Importer -- UC_CreatePurchase
-Importer -- UC_ViewPurchase
-Importer -- UC_UpdatePurchase
-Importer -- UC_DeletePurchase
+Importer -- UC_Logout
 
-Importer -- UC_CreateDelivery
-Importer -- UC_ViewDelivery
-Importer -- UC_UpdateDelivery
-Importer -- UC_DeleteDelivery
-
-Importer -- UC_EditPartner
-Importer -- UC_ViewPartner
-Importer -- UC_DeletePartner
-
-Importer -- UC_ViewProduct
-Importer -- UC_ViewPurchaseDebt
-
-Importer -- UC_SearchPurchase
-Importer -- UC_SearchPartner
-Importer -- UC_SearchProduct
-
-' Các include relationships
+' --- Các include relationships (giữ nguyên) ---
 UC_CreatePurchase ..> UC_ViewPartner : <<include>>
 UC_CreatePurchase ..> UC_ViewProduct : <<include>>
 UC_SearchPurchase ..> UC_ViewPurchase : <<include>>
 UC_SearchPartner ..> UC_ViewPartner : <<include>>
 UC_SearchProduct ..> UC_ViewProduct : <<include>>
+UC_SearchProject ..> UC_ViewProject : <<include>>
+UC_SearchVehicle ..> UC_ViewVehicle : <<include>>
+UC_SearchWarehouse ..> UC_ViewWarehouse : <<include>>
 @enduml
