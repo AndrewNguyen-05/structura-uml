@@ -73,8 +73,8 @@ rectangle "Structura Steel System" {
 }
 
 ' --- Kết nối rút gọn từ Actor tới các Package ---
-Importer --> (Quản lý Mua hàng)
-Importer --> (Quản lý Dữ liệu Chung)
+Importer -- (Quản lý Mua hàng)
+Importer -- (Quản lý Dữ liệu Chung)
 
 Importer -- UC_Login
 Importer -- UC_Logout

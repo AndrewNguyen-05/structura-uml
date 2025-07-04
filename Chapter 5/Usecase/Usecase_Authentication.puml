@@ -19,11 +19,11 @@ rectangle "Structura Steel System" {
 
 }
 
-User --> UC_Login
-User --> UC_Logout
-User --> UC_ForgotPassword
-User --> UC_FirstLoginChange
-User --> UC_ResetPassword
+User -- UC_Login
+User -- UC_Logout
+User -- UC_ForgotPassword
+User -- UC_FirstLoginChange
+User -- UC_ResetPassword
 
 ' Include relationships
 UC_ForgotPassword --> UC_SendOtp : <<include>>

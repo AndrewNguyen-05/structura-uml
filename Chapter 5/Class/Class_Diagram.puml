@@ -1,0 +1,289 @@
+@startuml
+!theme plain
+
+' ==== PRODUCT ====
+class Product {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  String code
+  String name
+  BigDecimal unitWeight
+  BigDecimal length
+  ProductType productType
+  BigDecimal width
+  BigDecimal height
+  BigDecimal thickness
+  BigDecimal diameter
+  String standard
+  Boolean deleted
+}
+
+' ==== PARTNER ====
+class Partner {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  PartnerType partnerType
+  String partnerName
+  String partnerCode
+  String taxCode
+  String legalRepresentative
+  String legalRepresentativePhone
+  String contactPerson
+  String contactPersonPhone
+  String bankName
+  String bankAccountNumber
+  BigDecimal debtPayable
+  BigDecimal debtReceivable
+  Boolean deleted
+}
+
+class PartnerProject {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  Partner partner
+  String projectName
+  String projectCode
+  String projectAddress
+  String projectRepresentative
+  String projectRepresentativePhone
+  String contactPerson
+  String contactPersonPhone
+  List<Long> productIds
+  Boolean deleted
+}
+Partner "1" o-- "*" PartnerProject
+
+class Warehouse {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  String warehouseName
+  String warehouseCode
+  String warehouseAddress
+  Partner partner
+  Boolean deleted
+}
+Partner "1" o-- "*" Warehouse
+
+class Vehicle {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  VehicleType vehicleType
+  String vehicleCode
+  String licensePlate
+  Double capacity
+  String description
+  String driverName
+  Partner partner
+  Boolean deleted
+}
+Partner "1" o-- "*" Vehicle
+
+' ==== USER ====
+class User {
+  String id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  String username
+  String email
+  String firstName
+  String lastName
+  String realmRole
+  Set<Permission> permissions
+}
+
+' ==== SALE ORDER ====
+class SaleOrder {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  String exportCode
+  Partner partner
+  PartnerProject project
+  OrderStatus status
+  BigDecimal totalAmount
+  String saleOrdersNote
+  Set<SaleOrderDetail> saleOrderDetails
+  Set<SaleDebt> saleDebts
+  Set<DeliveryOrder> deliveryOrders
+  boolean deleted
+}
+
+class SaleOrderDetail {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  SaleOrder saleOrder
+  Product product
+  BigDecimal quantity
+  BigDecimal weight
+  BigDecimal unitPrice
+  BigDecimal subtotal
+}
+SaleOrder "1" o-- "*" SaleOrderDetail
+
+class SaleDebt {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  SaleOrder saleOrder
+  Product product
+  BigDecimal originalAmount
+  BigDecimal remainingAmount
+  String debtNote
+  DebtStatus status
+}
+SaleOrder "1" o-- "*" SaleDebt
+
+SaleOrder "1" o-- "*" DeliveryOrder
+
+' ==== PURCHASE ORDER ====
+class PurchaseOrder {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  String importCode
+  Partner supplier
+  PartnerProject project
+  ConfirmationStatus confirmationFromSupplier
+  OrderStatus status
+  BigDecimal totalAmount
+  String purchaseOrdersNote
+  Set<PurchaseOrderDetail> purchaseOrderDetails
+  Set<PurchaseDebt> purchaseDebts
+  Set<DeliveryOrder> deliveryOrders
+  boolean deleted
+}
+
+class PurchaseOrderDetail {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  PurchaseOrder purchaseOrder
+  Product product
+  BigDecimal quantity
+  BigDecimal unitPrice
+  BigDecimal weight
+  BigDecimal subtotal
+}
+PurchaseOrder "1" o-- "*" PurchaseOrderDetail
+
+class PurchaseDebt {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  PurchaseOrder purchaseOrder
+  Product product
+  BigDecimal originalAmount
+  BigDecimal remainingAmount
+  String debtNote
+  DebtStatus status
+}
+PurchaseOrder "1" o-- "*" PurchaseDebt
+
+PurchaseOrder "1" o-- "*" DeliveryOrder
+
+' ==== DELIVERY ORDER ====
+class DeliveryOrder {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  PurchaseOrder purchaseOrder
+  SaleOrder saleOrder
+  String deliveryCode
+  Instant deliveryDate
+  OrderStatus status
+  Partner partner
+  Vehicle vehicle
+  String driverName
+  String deliveryAddress
+  ConfirmationStatus confirmationFromPartner
+  ConfirmationStatus confirmationFromFactory
+  ConfirmationStatus confirmationFromReceiver
+  BigDecimal distance
+  BigDecimal deliveryUnitPrice
+  BigDecimal additionalFees
+  BigDecimal totalDeliveryFee
+  DeliveryType deliveryType
+  String deliveryOrderNote
+  Set<DeliveryDebt> deliveryDebts
+  boolean deleted
+}
+
+class DeliveryDebt {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  DeliveryOrder deliveryOrder
+  String orderType
+  BigDecimal originalAmount
+  BigDecimal remainingAmount
+  String debtNote
+  DebtStatus status
+}
+DeliveryOrder "1" o-- "*" DeliveryDebt
+
+' ==== DEBT PAYMENT ====
+class DebtPayment {
+  Long id
+  Short version
+  Instant createdAt
+  Instant updatedAt
+  String createdBy
+  String updatedBy
+  DebtType debtType
+  Long debtId
+  Long partnerId
+  BigDecimal amountPaid
+  String paymentMethod
+  Instant paymentDate
+  String notes
+}
+
+@enduml

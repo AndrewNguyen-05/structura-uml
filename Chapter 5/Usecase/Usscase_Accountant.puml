@@ -70,9 +70,9 @@ rectangle "Structura Steel System" {
 }
 
 ' --- Kết nối rút gọn từ Actor tới các Package ---
-Accountant --> (Quản lý Tài chính & Kế toán)
-Accountant --> (Tra cứu Đơn hàng)
-Accountant --> (Quản lý Dữ liệu Chung)
+Accountant -- (Quản lý Tài chính & Kế toán)
+Accountant -- (Tra cứu Đơn hàng)
+Accountant -- (Quản lý Dữ liệu Chung)
 Accountant -- UC_Login
 Accountant -- UC_Logout
 

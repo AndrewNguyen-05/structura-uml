@@ -103,18 +103,18 @@ rectangle "Structura Steel System" {
 }
 
 ' Kết nối rút gọn tới các nhóm chức năng
-Admin -down-> (Quản trị Người dùng)
-Admin -down-> (Sản phẩm)
-Admin -down-> (Đối tác)
-Admin -down-> (Dự án)
-Admin -down-> (Kho)
-Admin -down-> (Phương tiện)
-Admin -down-> (Đơn hàng Bán)
-Admin -down-> (Đơn hàng Mua)
-Admin -down-> (Đơn Giao hàng)
-Admin -down-> (Công nợ)
-Admin -down-> (Lịch sử trả nợ)
-Admin -down-> (Công cụ & Báo cáo)
+Admin -- (Quản trị Người dùng)
+Admin -- (Sản phẩm)
+Admin -- (Đối tác)
+Admin -- (Dự án)
+Admin -- (Kho)
+Admin -- (Phương tiện)
+Admin -- (Đơn hàng Bán)
+Admin -- (Đơn hàng Mua)
+Admin -- (Đơn Giao hàng)
+Admin -- (Công nợ)
+Admin -- (Lịch sử trả nợ)
+Admin -- (Công cụ & Báo cáo)
 Admin -- UC_Login
 Admin -- UC_Logout
 @enduml
